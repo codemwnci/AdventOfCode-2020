@@ -16,10 +16,7 @@ class Day18 {
     }
 
     private fun parseAndCalculate(line: String, hasPrecedence: Boolean = false): Long {
-        // add spaces to brackets, so we can split by spaces, and then process one
-        val stack = ArrayDeque<MutableList<String>>()
-        stack.push(mutableListOf()) // start with the base list, which we'll calculate against at the end
-
+        
         // the logic is to flatten the string by reducing the values in the brackets to calculated number
         // each open bracket will go into a new stack entry in case there are nested brackets
         // So,
@@ -27,6 +24,10 @@ class Day18 {
         // if ( create a new entry at the top of the stack (push)
         // if ) pop the current top entry, calculate it and add the result to the next item in the stack (the new top after the pop)
 
+        val stack = ArrayDeque<MutableList<String>>()
+        stack.push(mutableListOf()) // start with the base list, which we'll calculate against at the end
+
+        // add spaces to brackets, so we can split by spaces, and then process one
         line.replace("(", "( ").replace(")", " )").split(" ").forEach {
             when(it) {
                 "(" -> stack.push(mutableListOf())
